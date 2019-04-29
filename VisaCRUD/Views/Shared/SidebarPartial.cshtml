@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Country>
+
+@{
     Layout = null;
 }
 
@@ -7,6 +9,8 @@
 </div>
 <hr />
 <div class="countries">
-    <a href="#" class="country">Hi</a>
-    <a href="#" class="country">There</a>
+    @foreach (var item in Model)
+    {
+        <a href="#" class="country">@item.Name</a>
+    }
 </div>

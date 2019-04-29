@@ -7,10 +7,13 @@
 }
 
 .countries {
+    background-color: #e7eeee;
+    height: calc(100vh - 113px);
+    overflow: auto;
+    text-align: center;
 }
 
 .countries a {
-    background-color: #a9eaee;
     display: block;
     padding: 0 5px 0 5px;
 }

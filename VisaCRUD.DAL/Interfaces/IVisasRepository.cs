@@ -11,5 +11,7 @@ namespace VisaCRUD.DAL.Interfaces
         bool Update(Visa visa, int? id = null);
         void Delete(Visa visa);
         void Delete(int id);
+
+        List<Country> GetAllCountries();
     }
 }

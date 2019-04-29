@@ -113,8 +113,7 @@ namespace VisaCRUD.DAL.Repositories
                         Visa existing = result.FirstOrDefault(x => x.Id == _visa.Id);
                         if (existing == null)
                         {
-                            if (_country != null)
-                                _visa.Country = _country;
+                            _visa.Country = _country;
                             if (_serviceType != null)
                                 _visa.ServiceType = _serviceType;
                             if (_document != null)
@@ -130,6 +129,18 @@ namespace VisaCRUD.DAL.Repositories
                         return _visa;
                     }
                     );
+
+                return result;
+            }
+        }
+
+        public List<Country> GetAllCountries()
+        {
+            string sql = "SELECT * FROM Countries";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                List<Country> result = connection.Query<Country>(sql).ToList();
 
                 return result;
             }

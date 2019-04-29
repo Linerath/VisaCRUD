@@ -15,7 +15,7 @@ namespace VisaCRUD
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             NinjectModule ninjectModule = new NinjectDependencies();
-            var kernel = new StandardKernel();
+            var kernel = new StandardKernel(ninjectModule);
             kernel.Unbind<ModelValidatorProvider>();
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
