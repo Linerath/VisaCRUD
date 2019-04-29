@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisaCRUD", "VisaCRUD\VisaCRUD.csproj", "{96D58516-D147-469F-877F-25692B3CB4EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisaCRUD.DAL", "VisaCRUD.DAL\VisaCRUD.DAL.csproj", "{7A3A0E2D-EE14-4E69-9DDC-C5D18DE180E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{96D58516-D147-469F-877F-25692B3CB4EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96D58516-D147-469F-877F-25692B3CB4EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96D58516-D147-469F-877F-25692B3CB4EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A3A0E2D-EE14-4E69-9DDC-C5D18DE180E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A3A0E2D-EE14-4E69-9DDC-C5D18DE180E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A3A0E2D-EE14-4E69-9DDC-C5D18DE180E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A3A0E2D-EE14-4E69-9DDC-C5D18DE180E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
