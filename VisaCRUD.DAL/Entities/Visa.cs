@@ -7,7 +7,7 @@ namespace VisaCRUD.DAL.Entities
     {
         public int Id { get; set; }
         public Country Country { get; set; }
-        public String ServiceType { get; set; }
+        public ServiceType ServiceType { get; set; }
         public String Terms { get; set; }
         public String Validity { get; set; }
         public String Period { get; set; }

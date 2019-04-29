@@ -46,16 +46,17 @@
   <ItemGroup>
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Document.cs" />
+    <Compile Include="Entities\ServiceType.cs" />
     <Compile Include="Entities\Visa.cs" />
+    <Compile Include="Interfaces\IVisasRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\VisasRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SQL\Create.sql" />
