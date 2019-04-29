@@ -9,6 +9,10 @@
 </head>
 <body>
 
+    @{
+        Html.RenderAction("Navbar", "Navigation");
+    }
+    
     <div>
         @RenderBody()
     </div>
