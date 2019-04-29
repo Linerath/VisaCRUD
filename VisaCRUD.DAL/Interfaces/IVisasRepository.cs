@@ -8,7 +8,7 @@ namespace VisaCRUD.DAL.Interfaces
         List<Visa> GetAll();
         int Add(Visa visa);
         bool Add(List<Visa> visa);
-        bool Update(Visa visa, int? id);
+        bool Update(Visa visa, int? id = null);
         void Delete(Visa visa);
         void Delete(int id);
     }

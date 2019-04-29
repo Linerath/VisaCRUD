@@ -94,11 +94,11 @@ namespace VisaCRUD.DAL.Repositories
 
         public List<Visa> GetAll()
         {
-            string sql = "SELECT t1.*, t2.* FROM Visas t1 "
+            string sql = "SELECT t1.*, t2.*, t3.*, t4.* FROM Visas t1 "
                 + "INNER JOIN Countries t2 ON t2.Id=t1.Country_Id "
-                + "INNER JOIN ServiceTypes t3 ON t3.Id=t1.ServiceType_Id "
-                + "INNER JOIN VisasDocuments t1t4 ON t1t4.Visa_Id=t1.Id "
-                + "INNER JOIN Documents t4 ON t4.Id=t1t4.Document_Id "
+                + "LEFT JOIN ServiceTypes t3 ON t3.Id=t1.ServiceType_Id "
+                + "LEFT JOIN VisasDocuments t1t4 ON t1t4.Visa_Id=t1.Id "
+                + "LEFT JOIN Documents t4 ON t4.Id=t1t4.Document_Id "
                 ;
 
             using (var connection = new SqlConnection(connectionString))
@@ -106,46 +106,56 @@ namespace VisaCRUD.DAL.Repositories
                 List<Visa> result = new List<Visa>();
 
                 connection
-                    .Query<Visa, Document, Visa>(sql,
-                    (_visa, _document) =>
+                    .Query<Visa, Country, ServiceType, Document, Visa>(sql,
+                    (_visa, _country, _serviceType, _document) =>
                     {
+
                         Visa existing = result.FirstOrDefault(x => x.Id == _visa.Id);
                         if (existing == null)
                         {
-                            _visa.Documents.Add(_document);
+                            if (_country != null)
+                                _visa.Country = _country;
+                            if (_serviceType != null)
+                                _visa.ServiceType = _serviceType;
+                            if (_document != null)
+                                _visa.Documents.Add(_document);
                             result.Add(_visa);
                         }
                         else
                         {
-                            existing.Documents.Add(_document);
+                            if (_document != null)
+                                existing.Documents.Add(_document);
                         }
 
                         return _visa;
-                    });
+                    }
+                    );
 
                 return result;
             }
         }
 
-        public bool Update(Visa visa, int? id)
+        public bool Update(Visa visa, int? id = null)
         {
             if (visa == null)
                 throw new ArgumentNullException(nameof(visa));
 
             String sql = @"
-                UPDATE Visas SET Country_Id = @country, ServiceType_Id = @serviceType, Terms = @terms, Validity = @validity, Period = @period, Number = @number, WebSite = @website) WHERE Id = @id;
-                SELECT CAST(SCOPE_IDENTITY() as int)";
+                UPDATE Visas SET Country_Id = @country, ServiceType_Id = @serviceType, Terms = @terms, Validity = @validity, Period = @period, Number = @number, WebSite = @website WHERE Id = @id";
+
+            if (id == null)
+                id = visa.Id;
 
             using (var connection = new SqlConnection(connectionString))
             {
-                int newId = connection.Query<int>(sql, new { country = visa.Country.Id, serviceType = visa.ServiceType.Id, visa.Terms, visa.Validity, visa.Period, visa.Number, visa.WebSite }).Single();
+                int result = connection.Execute(sql, new { country = visa.Country.Id, serviceType = visa.ServiceType.Id, visa.Terms, visa.Validity, visa.Period, visa.Number, visa.WebSite, id });
 
-                if (newId != visa.Id)
+                if (result != 1)
                     return false;
 
                 sql = @"DELETE FROM VisasDocuments WHERE Visa_Id = @id";
 
-                connection.Execute(sql, new { visa.Id });
+                connection.Execute(sql, new { id });
 
                 sql = "INSERT INTO VisasDocuments (Visa_Id, Document_Id) Values (@visaId, @documentId)";
 
