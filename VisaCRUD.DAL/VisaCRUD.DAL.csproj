@@ -54,7 +54,9 @@
     <Folder Include="Extensions\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Repositories\" />
-    <Folder Include="SQL\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SQL\Create.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

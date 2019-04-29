@@ -8,5 +8,10 @@ namespace VisaCRUD.Controllers
         {
             return PartialView("NavbarPartial");
         }
+
+        public PartialViewResult Sidebar()
+        {
+            return PartialView("SidebarPartial");
+        }
     }
 }

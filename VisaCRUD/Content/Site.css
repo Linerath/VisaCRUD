@@ -1,1 +1,34 @@
-﻿
+﻿.sidebar {
+    background-color: #f4b6b6;
+    position: sticky;
+}
+
+.search {
+}
+
+.countries {
+}
+
+.countries a {
+    background-color: #a9eaee;
+    display: block;
+    padding: 0 5px 0 5px;
+}
+
+.countries a:hover {
+    text-decoration: none;
+}
+
+.main-content {
+    background-color: #bababa;
+}
+
+/**************/
+
+nav {
+    background-color: #f9f3bf;
+}
+
+.row {
+    margin: 0px;
+}
