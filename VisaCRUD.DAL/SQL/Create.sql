@@ -13,6 +13,9 @@ GO
 DROP TABLE IF EXISTS [dbo].[Countries]
 GO
 
+DROP TABLE IF EXISTS [dbo].[ServiceTypes]
+GO
+
 CREATE TABLE [dbo].[Countries](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](max) NOT NULL,
@@ -20,10 +23,17 @@ CONSTRAINT [PK_dbo.Countries] PRIMARY KEY CLUSTERED ([Id] ASC),
 )
 GO
 
+CREATE TABLE [dbo].[ServiceTypes](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+CONSTRAINT [PK_dbo.ServiceTypes] PRIMARY KEY CLUSTERED ([Id] ASC),
+)
+GO
+
 CREATE TABLE [dbo].[Visas](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Country_Id] [int] NOT NULL,
-	[ServiceType] [nvarchar](max),
+	[ServiceType_Id] [int],
 	[Terms] [nvarchar](max),
 	[Validity] [nvarchar](max),
 	[Period] [nvarchar](max),
@@ -33,6 +43,10 @@ CONSTRAINT [PK_dbo.Visas] PRIMARY KEY CLUSTERED ([Id] ASC),
 CONSTRAINT [FK_dbo.Visas_dbo.Countries_Country_Id]
 	FOREIGN KEY([Country_Id])
 	REFERENCES [dbo].[Countries]([Id])
+	ON DELETE CASCADE,
+CONSTRAINT [FK_dbo.Visas_dbo.ServiceTypes_ServiceType_Id]
+	FOREIGN KEY([ServiceType_Id])
+	REFERENCES [dbo].[ServiceTypes]([Id])
 	ON DELETE CASCADE,
 )
 GO

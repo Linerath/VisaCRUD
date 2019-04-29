@@ -44,19 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\Document.cs" />
+    <Compile Include="Entities\Visa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\" />
     <Folder Include="Extensions\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SQL\Create.sql" />
+    <Content Include="SQL\Insert.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
