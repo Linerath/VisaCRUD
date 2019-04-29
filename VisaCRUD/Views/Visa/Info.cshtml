@@ -1,0 +1,31 @@
+﻿@model Visa
+
+<div class="main-content">
+    @if (Model != null)
+    {
+        <div class="info">
+            <h2>Информация о визе</h2>
+            <div class="pl-2">
+                <div>
+                    Страна: <i>@(Model.Country != null ? Model.Country.Name : "")</i>
+                </div>
+                <div>
+                    Вид услуги: <i>@(Model.ServiceType != null ? Model.ServiceType.Name : "")</i>
+                </div>
+                <div>Сроки оформления: <i>@Model.Terms</i></div>
+                <div>Период действия визы: <i>@Model.Validity</i></div>
+                <div>Период пребывания в стране: <i>@Model.Period</i></div>
+                <div>Количество въездов в страну: <i>@Model.Number</i></div>
+                <div>Сайт посольства: <i>@Model.WebSite</i></div>
+            </div>
+        </div>
+        <div class="info">
+        </div>
+    }
+    else
+    {
+        <div class="no-info">
+            <h1 class="w-100">Информация отсутствует</h1>
+        </div>
+    }
+</div>

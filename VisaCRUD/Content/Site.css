@@ -1,35 +1,67 @@
 ﻿.sidebar {
-    background-color: #f4b6b6;
+    top: 59px;
     position: sticky;
-}
-
-.search {
+    background-color: #fbfbfb;
 }
 
 .countries {
-    background-color: #e7eeee;
-    height: calc(100vh - 113px);
+    height: calc(100vh - 92px);
     overflow: auto;
     text-align: center;
 }
 
-.countries a {
-    display: block;
-    padding: 0 5px 0 5px;
-}
+    .countries a {
+        height: 25px;
+        display: block;
+        padding: 0 5px 0 5px;
+    }
 
-.countries a:hover {
-    text-decoration: none;
-}
+        .countries a:hover {
+            text-decoration: none;
+            background-color: #efefef;
+        }
 
 .main-content {
-    background-color: #bababa;
+    height: 100%;
+    font-size: 14px;
+    
+}
+
+.info,
+.info {
+    min-height: 250px;
+    height: 50%;
+    padding: 20px;
+}
+
+.info {
+}
+
+.info i {
+    color: red;
+}
+
+.no-info {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+
+.w-100 {
+    width: 100%;
 }
 
 /**************/
+body {
+}
 
 nav {
     background-color: #f9f3bf;
+    position: sticky !important;
+    z-index: 100;
+    top: 0px;
+    height: 55px;
 }
 
 .row {

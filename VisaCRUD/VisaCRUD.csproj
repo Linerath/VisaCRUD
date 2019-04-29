@@ -175,7 +175,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Main\Home.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Visa\All.cshtml" />
+    <Content Include="Views\Visa\Info.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Shared\NavbarPartial.cshtml" />

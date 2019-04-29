@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace VisaCRUD
@@ -14,9 +10,15 @@ namespace VisaCRUD
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: null,
+                url: "{countryId}",
+                defaults: new { controller = "Visa", action = "Info" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Main", action = "Home", id = UrlParameter.Optional }
+                defaults: new { controller = "Visa", action = "Info", id = UrlParameter.Optional }
             );
         }
     }

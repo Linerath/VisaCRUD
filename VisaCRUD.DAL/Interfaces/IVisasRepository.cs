@@ -13,5 +13,6 @@ namespace VisaCRUD.DAL.Interfaces
         void Delete(int id);
 
         List<Country> GetAllCountries();
+        Visa GetVisaByCountryId(int id);
     }
 }

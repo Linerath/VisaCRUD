@@ -13,10 +13,10 @@
         @{ Html.RenderAction("Navbar", "Navigation"); }
 
         <div class="container-fluid row p-0">
-            <div class="sidebar col-3 p-0">
+            <div class="col-lg-3 p-0">
                 @{ Html.RenderAction("Sidebar", "Navigation"); }
             </div>
-            <main class="main-content col-9 p-2">
+            <main class="col-lg-9 p-0">
                 @RenderBody()
             </main>
         </div>

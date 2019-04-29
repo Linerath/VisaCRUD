@@ -127,8 +127,42 @@ namespace VisaCRUD.DAL.Repositories
                         }
 
                         return _visa;
-                    }
-                    );
+                    });
+
+                return result;
+            }
+        }
+
+        public Visa GetVisaByCountryId(int id)
+        {
+            string sql = "SELECT t1.*, t2.*, t3.*, t4.* FROM Visas t1 "
+                + "INNER JOIN Countries t2 ON t2.Id=t1.Country_Id "
+                + "LEFT JOIN ServiceTypes t3 ON t3.Id=t1.ServiceType_Id "
+                + "LEFT JOIN VisasDocuments t1t4 ON t1t4.Visa_Id=t1.Id "
+                + "LEFT JOIN Documents t4 ON t4.Id=t1t4.Document_Id "
+                + "WHERE t2.Id=@id"
+                ;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                Visa result = null;
+
+                connection
+                    .Query<Visa, Country, ServiceType, Document, Visa>(sql,
+                    (_visa, _country, _serviceType, _document) =>
+                    {
+                        if (result == null)
+                        {
+                            result = _visa;
+                            result.Country = _country;
+                            result.ServiceType = _serviceType;
+                        }
+
+                        if (_document != null)
+                            result.Documents.Add(_document);
+
+                        return _visa;
+                    }, new { id });
 
                 return result;
             }

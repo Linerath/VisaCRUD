@@ -4,13 +4,12 @@
     Layout = null;
 }
 
-<div class="search p-2">
-    Search goes here...
-</div>
-<hr />
-<div class="countries">
-    @foreach (var item in Model)
-    {
-        <a href="#" class="country">@item.Name</a>
-    }
+<div class="sidebar">
+    <h4 class="text-center m-1">Страны</h4>
+    <div class="countries">
+        @foreach (var item in Model)
+        {
+            @Html.ActionLink(item.Name, "Info", "Visa", new { countryId = item.Id }, new { @class = "country" })
+        }
+    </div>
 </div>
