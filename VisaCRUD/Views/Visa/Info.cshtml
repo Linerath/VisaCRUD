@@ -1,12 +1,24 @@
-﻿@model VisaViewModel
+﻿@model CountryInfoViewModel
 
 @{
-    Visa visa = Model.Visa;
+    List<Visa> visas = Model.Visas;
+    Visa visa = visas?.FirstOrDefault();
 }
 
 @if (visa != null)
 {
     <div class="info">
+        @Html.ActionLink(
+            "Изменить", "Edit",
+            new { },
+            new { @class = "btn btn-primary" }
+        )
+        @Html.ActionLink(
+            "Удалить", "Delete",
+            new { },
+            new { @class = "btn", style = "color: white; background-color: #ff6170" }
+        )
+        <hr />
         <h2>Информация о визе</h2>
         <div class="pl-2">
             <div>

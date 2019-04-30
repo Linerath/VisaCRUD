@@ -5,7 +5,7 @@ namespace VisaCRUD.DAL.Interfaces
 {
     public interface IVisasRepository
     {
-        List<Visa> GetAll();
+        List<Visa> GetAll(int? countryId = null);
         int Add(Visa visa);
         bool Add(List<Visa> visa);
         bool Update(Visa visa, int? id = null);
@@ -14,6 +14,7 @@ namespace VisaCRUD.DAL.Interfaces
 
         List<Country> GetAllCountries();
         Country GetCountryById(int id);
-        Visa GetVisaByCountryId(int id);
+        List<ServiceType> GetAllServiceTypes();
+        List<Document> GetAllDocuments();
     }
 }

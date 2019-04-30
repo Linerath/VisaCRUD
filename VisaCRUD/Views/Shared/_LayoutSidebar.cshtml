@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css" />
     <link rel="stylesheet" href="~/Content/Site.css" />
 </head>
 <body>
@@ -15,7 +16,7 @@
 
         <div class="container-fluid row p-0">
             <div class="col-lg-3 p-0">
-                @{ Html.RenderAction("Sidebar", "Navigation", new { Model.SelectedCountryId }); }
+                @{ Html.RenderAction("Sidebar", "Navigation", new { selectedCountryId = (Model != null ? Model.SelectedCountryId : null) }); }
             </div>
             <main class="main-content col-lg-9 p-0">
                 @RenderBody()

@@ -14,11 +14,12 @@
     height: 25px;
     display: block;
     padding: 0 5px 0 5px;
+    color: #3500ff;
 }
 
     .country:hover {
-        text-decoration: none;
         background-color: #efefef;
+        color: #06008e;
     }
 
     .country.selected {
@@ -35,7 +36,8 @@
 }
 
     .info i {
-        color: red;
+        color: #800000;
+        font-size: 18px;
     }
 
 .doc-desc {
@@ -65,14 +67,10 @@ nav {
     height: 55px;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 .row {
     margin: 0px;
 }
-
-a {
-    color: #1d14f5;
-}
-
-    a:hover {
-        color: #06008e;
-    }

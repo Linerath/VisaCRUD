@@ -3,9 +3,15 @@
 }
 
 <nav class="navbar navbar-light bg-secondary">
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            Hello, {username}
+    <ul class="navbar-nav navbar-brand">
+        <li>
+            @Html.ActionLink("Добавить визу", "Add", "Visa", new { }, new { @class = "text-light" })
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item navbar-brand">
+            <span class="text-primary">{username}</span>
+            <i class="fa fa-sign-out text-light"></i>
         </li>
     </ul>
 </nav>
