@@ -1,7 +1,7 @@
 ﻿.sidebar {
     top: 59px;
     position: sticky;
-    background-color: #fbfbfb;
+    /*background-color: #fbfbfb;*/
 }
 
 .countries {
@@ -10,35 +10,36 @@
     text-align: center;
 }
 
-    .countries a {
-        height: 25px;
-        display: block;
-        padding: 0 5px 0 5px;
-    }
-
-        .countries a:hover {
-            text-decoration: none;
-            background-color: #efefef;
-        }
-
-.main-content {
-    height: 100%;
-    font-size: 14px;
-    
+.country {
+    height: 25px;
+    display: block;
+    padding: 0 5px 0 5px;
 }
 
-.info,
+    .country:hover {
+        text-decoration: none;
+        background-color: #efefef;
+    }
+
+    .country.selected {
+        background-color: #efefef;
+    }
+
+.main-content {
+    font-size: 14px;
+}
+
 .info {
-    min-height: 250px;
-    height: 50%;
+    min-height: 500px;
     padding: 20px;
 }
 
-.info {
-}
+    .info i {
+        color: red;
+    }
 
-.info i {
-    color: red;
+.doc-desc {
+    font-size: 12px;
 }
 
 .no-info {
@@ -67,3 +68,11 @@ nav {
 .row {
     margin: 0px;
 }
+
+a {
+    color: #1d14f5;
+}
+
+    a:hover {
+        color: #06008e;
+    }

@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model BaseSidebarViewModel
 
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -14,9 +15,9 @@
 
         <div class="container-fluid row p-0">
             <div class="col-lg-3 p-0">
-                @{ Html.RenderAction("Sidebar", "Navigation"); }
+                @{ Html.RenderAction("Sidebar", "Navigation", new { Model.SelectedCountryId }); }
             </div>
-            <main class="col-lg-9 p-0">
+            <main class="main-content col-lg-9 p-0">
                 @RenderBody()
             </main>
         </div>

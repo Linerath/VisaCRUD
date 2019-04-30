@@ -218,5 +218,17 @@ namespace VisaCRUD.DAL.Repositories
                 return true;
             }
         }
+
+        public Country GetCountryById(int id)
+        {
+            string sql = "SELECT * FROM Countries WHERE Id=@id";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                Country result = connection.QueryFirst<Country>(sql, new { id });
+
+                return result;
+            }
+        }
     }
 }

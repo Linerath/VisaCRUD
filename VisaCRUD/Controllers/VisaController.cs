@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using VisaCRUD.DAL.Entities;
 using VisaCRUD.DAL.Interfaces;
+using VisaCRUD.Models.ViewModels;
 
 namespace VisaCRUD.Controllers
 {
@@ -15,9 +16,15 @@ namespace VisaCRUD.Controllers
 
         public ViewResult Info(int? countryId = null)
         {
-            Visa model = null;
-            if (countryId != null)
-                model = visasRepository.GetVisaByCountryId(countryId.Value);
+            Visa visa = (countryId != null)
+                ? visasRepository.GetVisaByCountryId(countryId.Value)
+                : null;
+
+            VisaViewModel model = new VisaViewModel
+            {
+                SelectedCountryId = countryId,
+                Visa = visa,
+            };
 
             return View(model);
         }

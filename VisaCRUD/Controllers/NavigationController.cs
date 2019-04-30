@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using VisaCRUD.DAL.Entities;
 using VisaCRUD.DAL.Interfaces;
+using VisaCRUD.Models.ViewModels;
 
 namespace VisaCRUD.Controllers
 {
@@ -19,9 +20,13 @@ namespace VisaCRUD.Controllers
             return PartialView("NavbarPartial");
         }
 
-        public PartialViewResult Sidebar()
+        public PartialViewResult Sidebar(int? selectedCountryId)
         {
-            List<Country> model = visasRepository.GetAllCountries();
+            CountriesViewModel model = new CountriesViewModel
+            {
+                SelectedCountryId = selectedCountryId,
+                Countries = visasRepository.GetAllCountries(),
+            };
 
             return PartialView("SidebarPartial", model);
         }

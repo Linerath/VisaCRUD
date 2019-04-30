@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Country>
+﻿@model CountriesViewModel
 
 @{
     Layout = null;
@@ -7,9 +7,13 @@
 <div class="sidebar">
     <h4 class="text-center m-1">Страны</h4>
     <div class="countries">
-        @foreach (var item in Model)
+        @foreach (var item in Model.Countries)
         {
-            @Html.ActionLink(item.Name, "Info", "Visa", new { countryId = item.Id }, new { @class = "country" })
+            @Html.ActionLink(
+                item.Name, "Info", "Visa",
+                new { countryId = item.Id },
+                new { @class = $"country {(item.Id == Model.SelectedCountryId ? "selected" : "")}" }
+            )
         }
     </div>
 </div>
