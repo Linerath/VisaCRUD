@@ -23,8 +23,8 @@
                         )
                         @Html.ActionLink(
                             "Удалить", "Delete",
-                            new { },
-                            new { @class = "btn", style = "color: white; background-color: #ff6170" }
+                            new { visaId = visa.Id, countryId = Model.SelectedCountryId },
+                            new { @class = "btn", style = "color: white; background-color: #ff6170", onclick = "return onDelete()" }
                         )
                     </span>
                 </div>
@@ -61,3 +61,9 @@ else
         <h1 class="w-100">Информация отсутствует</h1>
     </div>
 }
+
+<script>
+    function onDelete() {
+        return confirm('Удалить?');
+    }
+</script>

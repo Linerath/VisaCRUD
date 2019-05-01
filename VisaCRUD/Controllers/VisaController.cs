@@ -119,5 +119,12 @@ namespace VisaCRUD.Controllers
 
             return RedirectToAction("Info", new { countryId = visa.Country });
         }
+
+        public RedirectToRouteResult Delete(int visaId, int countryId)
+        {
+            visasRepository.Delete(visaId);
+
+            return RedirectToAction("Info", new { countryId });
+        }
     }
 }

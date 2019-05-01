@@ -241,6 +241,8 @@ INSERT INTO [dbo].[Visas]
 		,(198, 1, N'0 дней', N'29 дней', N'12 месяцев', N'бесконечно', N'bb.com')
 		,(101, 1, N'хз дней', N'чего?', N'навсегда', N'до смерти', N'allo.com')
 		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', N'Untill dawn', N'rip.com')
+		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', N'Untill dawn', N'rip.com')
+		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', N'Untill dawn', N'rip.com')
 GO
 
 DELETE FROM [dbo].[VisasDocuments]
