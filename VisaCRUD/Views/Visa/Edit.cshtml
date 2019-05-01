@@ -1,0 +1,69 @@
+﻿@model EditVisaViewModel
+
+<div class="p-5">
+    <h2 class="text-center">Добавление новой визы</h2>
+    @using (Html.BeginForm("Edit", "Visa", FormMethod.Post))
+    {
+        @Html.Hidden("Id", Model.Visa.Id)
+
+        <div class="form-group">
+            @Html.Label("Country", "Страна*")
+            @Html.DropDownList("Country",
+                Model.Countries.Select(y => new SelectListItem { Text = y.Name, Value = y.Id.ToString(), Selected = Model.Visa.Country.Id == y.Id }),
+                new { @class = "form-control" }
+            )
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col">
+                @Html.Label("ServiceType", "Вид услуги")
+                @Html.DropDownList("ServiceType",
+                    Model.ServiceTypes.Select(y => new SelectListItem { Text = y.Name, Value = y.Id.ToString(), Selected = (Model.Visa.ServiceType != null && Model.Visa.ServiceType.Id == y.Id) }),
+                    "",
+                    new { @class = "form-control" }
+                )
+            </div>
+            <div class="form-group col">
+                @Html.Label("Terms", "Сроки оформления")
+                @Html.TextBox("Terms", Model.Visa.Terms, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col">
+                @Html.Label("Validity", "Период действия визы")
+                @Html.TextBox("Validity", Model.Visa.Validity, new { @class = "form-control" })
+            </div>
+            <div class="form-group col">
+                @Html.Label("Period", "Период пребывания в стране")
+                @Html.TextBox("Period", Model.Visa.Period, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col">
+                @Html.Label("Number", "Количество въездов в страну")
+                @Html.TextBox("Number", Model.Visa.Number, new { @class = "form-control" })
+            </div>
+            <div class="form-group col">
+                @Html.Label("WebSite", "Сайт посольства")
+                @Html.TextBox("WebSite", Model.Visa.WebSite, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <hr />
+        <h2 class="text-center">Необходимые документы</h2>
+
+        foreach (var item in Model.Documents)
+        {
+            <div class="form-check">
+                <label class="form-check-label" for="@item.Id">
+                    <input class="form-check-input" type="checkbox" name="Documents" id="@item.Id" value="@item.Id" checked="false"/>
+                    @item.Name
+                </label>
+            </div>
+        }
+
+        <button type="submit" class="btn btn-primary mt-3">Ок</button>
+    }
+</div>

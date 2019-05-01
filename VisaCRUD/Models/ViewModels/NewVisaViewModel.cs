@@ -4,6 +4,7 @@ namespace VisaCRUD.Models.ViewModels
 {
     public class NewVisaViewModel
     {
+        public int? Id { get; set; }
         public int Country { get; set; }
         public int? ServiceType { get; set; }
         public String Terms { get; set; }

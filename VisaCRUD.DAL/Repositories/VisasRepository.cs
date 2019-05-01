@@ -162,7 +162,7 @@ namespace VisaCRUD.DAL.Repositories
 
             using (var connection = new SqlConnection(connectionString))
             {
-                int result = connection.Execute(sql, new { country = visa.Country.Id, serviceType = visa.ServiceType.Id, visa.Terms, visa.Validity, visa.Period, visa.Number, visa.WebSite, id });
+                int result = connection.Execute(sql, new { country = visa.Country.Id, serviceType = visa.ServiceType?.Id, visa.Terms, visa.Validity, visa.Period, visa.Number, visa.WebSite, id });
 
                 if (result != 1)
                     return false;
@@ -221,6 +221,49 @@ namespace VisaCRUD.DAL.Repositories
                 List<Document> result = connection.Query<Document>(sql).ToList();
 
                 return result;
+            }
+        }
+
+        public Visa GetVisaById(int visaId)
+        {
+            string sql = "SELECT t1.*, t2.*, t3.*, t4.* FROM Visas t1 "
+                + "INNER JOIN Countries t2 ON t2.Id=t1.Country_Id "
+                + "LEFT JOIN ServiceTypes t3 ON t3.Id=t1.ServiceType_Id "
+                + "LEFT JOIN VisasDocuments t1t4 ON t1t4.Visa_Id=t1.Id "
+                + "LEFT JOIN Documents t4 ON t4.Id=t1t4.Document_Id "
+                + "WHERE t1.Id=@id"
+                ;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                List<Visa> result = new List<Visa>();
+
+                connection
+                    .Query<Visa, Country, ServiceType, Document, Visa>(sql,
+                    (_visa, _country, _serviceType, _document) =>
+                    {
+
+                        Visa existing = result.FirstOrDefault(x => x.Id == _visa.Id);
+                        if (existing == null)
+                        {
+                            _visa.Country = _country;
+                            if (_serviceType != null)
+                                _visa.ServiceType = _serviceType;
+                            if (_document != null)
+                                _visa.Documents.Add(_document);
+                            result.Add(_visa);
+                        }
+                        else
+                        {
+                            if (_document != null)
+                                existing.Documents.Add(_document);
+                        }
+
+                        return _visa;
+                    },
+                    new { id = visaId });
+
+                return result.FirstOrDefault();
             }
         }
     }

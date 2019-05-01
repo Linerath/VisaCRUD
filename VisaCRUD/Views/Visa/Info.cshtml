@@ -18,7 +18,7 @@
                     <span class="visa-header-btn float-right">
                         @Html.ActionLink(
                             "Изменить", "Edit",
-                            new { },
+                            new { visaId = visa.Id },
                             new { @class = "btn btn-primary" }
                         )
                         @Html.ActionLink(
@@ -45,7 +45,7 @@
                 <div class="pl-2">
                     @for (int j = 0; j < visa.Documents.Count; ++j)
                     {
-                        <div>@j) @visa.Documents[j].Name</div>
+                        <div>@(j + 1)) @visa.Documents[j].Name</div>
                         <div class="doc-desc ml-3">
                             @visa.Documents[j].Description
                         </div>
