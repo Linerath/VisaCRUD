@@ -2,47 +2,57 @@
 
 @{
     List<Visa> visas = Model.Visas;
-    Visa visa = visas?.FirstOrDefault();
 }
 
-@if (visa != null)
+@if (visas != null && visas.Count > 0)
 {
     <div class="info">
-        @Html.ActionLink(
-            "Изменить", "Edit",
-            new { },
-            new { @class = "btn btn-primary" }
-        )
-        @Html.ActionLink(
-            "Удалить", "Delete",
-            new { },
-            new { @class = "btn", style = "color: white; background-color: #ff6170" }
-        )
-        <hr />
-        <h2>Информация о визе</h2>
-        <div class="pl-2">
-            <div>
-                Страна: <i>@(visa.Country != null ? visa.Country.Name : "")</i>
-            </div>
-            <div>
-                Вид услуги: <i>@(visa.ServiceType != null ? visa.ServiceType.Name : "")</i>
-            </div>
-            <div>Сроки оформления: <i>@visa.Terms</i></div>
-            <div>Период действия визы: <i>@visa.Validity</i></div>
-            <div>Период пребывания в стране: <i>@visa.Period</i></div>
-            <div>Количество въездов в страну: <i>@visa.Number</i></div>
-            <div>Сайт посольства: <i>@visa.WebSite</i></div>
-        </div>
-        <h2 class="mt-3">Необходимые документы</h2>
-        <div class="pl-2">
-            @for (int i = 0; i < visa.Documents.Count; ++i)
-            {
-                <div>@i) @visa.Documents[i].Name</div>
-                <div class="doc-desc ml-3">
-                    @visa.Documents[i].Description
+        @for (int i = 0; i < visas.Count; ++i)
+        {
+            var visa = visas[i];
+
+            <div class="visa">
+                <div class="visa-header d-inline">
+                    <h2 class="d-inline">Информация о визе</h2>
+                    <span class="visa-header-num float-right">#@(i + 1)</span>
+                    <span class="visa-header-btn float-right">
+                        @Html.ActionLink(
+                            "Изменить", "Edit",
+                            new { },
+                            new { @class = "btn btn-primary" }
+                        )
+                        @Html.ActionLink(
+                            "Удалить", "Delete",
+                            new { },
+                            new { @class = "btn", style = "color: white; background-color: #ff6170" }
+                        )
+                    </span>
                 </div>
-            }
-        </div>
+                <div class="pl-2">
+                    <div>
+                        Страна: <i>@(visa.Country != null ? visa.Country.Name : "")</i>
+                    </div>
+                    <div>
+                        Вид услуги: <i>@(visa.ServiceType != null ? visa.ServiceType.Name : "")</i>
+                    </div>
+                    <div>Сроки оформления: <i>@visa.Terms</i></div>
+                    <div>Период действия визы: <i>@visa.Validity</i></div>
+                    <div>Период пребывания в стране: <i>@visa.Period</i></div>
+                    <div>Количество въездов в страну: <i>@visa.Number</i></div>
+                    <div>Сайт посольства: <i>@visa.WebSite</i></div>
+                </div>
+                <h2 class="mt-3">Необходимые документы</h2>
+                <div class="pl-2">
+                    @for (int j = 0; j < visa.Documents.Count; ++j)
+                    {
+                        <div>@j) @visa.Documents[j].Name</div>
+                        <div class="doc-desc ml-3">
+                            @visa.Documents[j].Description
+                        </div>
+                    }
+                </div>
+            </div>
+        }
     </div>
 }
 else

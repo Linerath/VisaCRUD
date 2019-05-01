@@ -40,6 +40,24 @@
         font-size: 18px;
     }
 
+.visa {
+    border: 1px solid #0000002b;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 1rem;
+}
+
+.visa-header-num {
+    font-size: 35px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.visa-header-btn {
+    margin-right: 13px;
+    margin-top: 7px;
+}
+
 .doc-desc {
     font-size: 12px;
 }
