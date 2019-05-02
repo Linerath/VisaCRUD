@@ -7,19 +7,20 @@
 .countries {
     height: calc(100vh - 92px);
     overflow: auto;
-    text-align: center;
 }
 
 .country {
-    height: 25px;
+    min-height: 25px;
     display: block;
     padding: 0 5px 0 5px;
-    color: #3500ff;
+    color: #0563c1;
+    /*font-family: Candara;*/
+    font-family: Malgun Gothic;
 }
 
     .country:hover {
         background-color: #efefef;
-        color: #06008e;
+        color: #065eb6;
     }
 
     .country.selected {
