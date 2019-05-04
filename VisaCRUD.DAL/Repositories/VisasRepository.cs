@@ -236,34 +236,27 @@ namespace VisaCRUD.DAL.Repositories
 
             using (var connection = new SqlConnection(connectionString))
             {
-                List<Visa> result = new List<Visa>();
+                Visa result = null;
 
                 connection
                     .Query<Visa, Country, ServiceType, Document, Visa>(sql,
                     (_visa, _country, _serviceType, _document) =>
                     {
+                        if (result == null || result.Id == _visa?.Id)
+                            result = _visa;
 
-                        Visa existing = result.FirstOrDefault(x => x.Id == _visa.Id);
-                        if (existing == null)
-                        {
+                        if (_visa.Country == null && _country != null)
                             _visa.Country = _country;
-                            if (_serviceType != null)
-                                _visa.ServiceType = _serviceType;
-                            if (_document != null)
-                                _visa.Documents.Add(_document);
-                            result.Add(_visa);
-                        }
-                        else
-                        {
-                            if (_document != null)
-                                existing.Documents.Add(_document);
-                        }
+                        if (_visa.ServiceType == null && _serviceType != null)
+                            _visa.ServiceType = _serviceType;
+                        if (_document != null)
+                            _visa.Documents.Add(_document);
 
                         return _visa;
                     },
                     new { id = visaId });
 
-                return result.FirstOrDefault();
+                return result;
             }
         }
     }
