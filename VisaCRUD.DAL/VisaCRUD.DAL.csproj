@@ -46,10 +46,14 @@
   <ItemGroup>
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Document.cs" />
+    <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\ServiceType.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Visa.cs" />
     <Compile Include="Interfaces\IVisasRepository.cs" />
+    <Compile Include="Interfaces\IUsersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\UsersRepository.cs" />
     <Compile Include="Repositories\VisasRepository.cs" />
   </ItemGroup>
   <ItemGroup>

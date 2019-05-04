@@ -1,5 +1,6 @@
 ﻿@{
     Layout = null;
+    UserDto user = Session["User"] as UserDto;
 }
 
 <nav class="navbar navbar-light bg-secondary">
@@ -8,10 +9,17 @@
             @Html.ActionLink("Добавить визу", "Add", "Visa", new { }, new { @class = "text-light" })
         </li>
     </ul>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item navbar-brand">
-            <span class="text-primary">{username}</span>
-            <i class="fa fa-sign-out text-light"></i>
-        </li>
-    </ul>
+    @if (user != null)
+    {
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item navbar-brand">
+                <span class="text-primary">@(user.Login)</span>
+                @Html.ActionLink(
+                    " ", "Logout", "User",
+                    new { },
+                    new { @class = "fa fa-sign-out text-light" }
+                )
+            </li>
+        </ul>
+    }
 </nav>

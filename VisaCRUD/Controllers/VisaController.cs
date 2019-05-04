@@ -4,10 +4,12 @@ using System.Linq;
 using System.Web.Mvc;
 using VisaCRUD.DAL.Entities;
 using VisaCRUD.DAL.Interfaces;
+using VisaCRUD.Infrastructure;
 using VisaCRUD.Models.ViewModels;
 
 namespace VisaCRUD.Controllers
 {
+    [RoleAuthorize]
     public class VisaController : Controller
     {
         private IVisasRepository visasRepository;
@@ -32,6 +34,7 @@ namespace VisaCRUD.Controllers
             return View(model);
         }
 
+        [RoleAuthorize(Roles = "Admin")]
         [HttpGet]
         public ViewResult Add()
         {
@@ -45,6 +48,7 @@ namespace VisaCRUD.Controllers
             return View(model);
         }
 
+        [RoleAuthorize(Roles = "Admin")]
         [HttpPost]
         public RedirectToRouteResult Add(NewVisaViewModel visa)
         {
@@ -65,13 +69,14 @@ namespace VisaCRUD.Controllers
                 newVisa.ServiceType = new ServiceType { Id = visa.ServiceType.Value };
 
             if (visa.Documents?.Length > 0)
-                newVisa.Documents = visa.Documents.Select(x => new Document{ Id = x }).ToList();
+                newVisa.Documents = visa.Documents.Select(x => new Document { Id = x }).ToList();
 
             visasRepository.Add(newVisa);
 
             return RedirectToAction("Info", new { countryId = visa.Country });
         }
 
+        [RoleAuthorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult Edit(int visaId)
         {
@@ -89,6 +94,7 @@ namespace VisaCRUD.Controllers
             return View(model);
         }
 
+        [RoleAuthorize(Roles = "Admin")]
         [HttpPost]
         public RedirectToRouteResult Edit(NewVisaViewModel visa)
         {
@@ -120,6 +126,7 @@ namespace VisaCRUD.Controllers
             return RedirectToAction("Info", new { countryId = visa.Country });
         }
 
+        [RoleAuthorize(Roles = "Admin")]
         public RedirectToRouteResult Delete(int visaId, int countryId)
         {
             visasRepository.Delete(visaId);
