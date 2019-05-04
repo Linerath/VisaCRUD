@@ -1,8 +1,6 @@
 ﻿USE [VisaCRUD]
 GO
 
-DELETE FROM [dbo].[Countries]
-GO
 INSERT INTO [dbo].[Countries]
            ([Name])
      VALUES
@@ -208,8 +206,6 @@ INSERT INTO [dbo].[Countries]
 		,(N'Сент-Китс и Невис')
 GO
 
-DELETE FROM [dbo].[Documents]
-GO
 INSERT INTO [dbo].[Documents]
            ([Name], [Description])
      VALUES
@@ -221,8 +217,6 @@ INSERT INTO [dbo].[Documents]
 		,(N'Удочка', N'Рыбалка - не только занятие для личного времяпрепровождения, но и отличный способ заработка!')
 GO
 
-DELETE FROM [dbo].[ServiceTypes]
-GO
 INSERT INTO [dbo].[ServiceTypes]
            ([Name])
      VALUES
@@ -231,8 +225,6 @@ INSERT INTO [dbo].[ServiceTypes]
 		,(N'Тумаки')
 GO
 
-DELETE FROM [dbo].[Visas]
-GO
 INSERT INTO [dbo].[Visas]
            ([Country_Id], [ServiceType_Id], [Terms], [Validity], [Period], [Number], [WebSite])
      VALUES
@@ -245,8 +237,6 @@ INSERT INTO [dbo].[Visas]
 		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', N'Untill dawn', N'rip.com')
 GO
 
-DELETE FROM [dbo].[VisasDocuments]
-GO
 INSERT INTO [dbo].[VisasDocuments]
            ([Visa_Id], [Document_Id])
      VALUES
@@ -268,4 +258,18 @@ INSERT INTO [dbo].[VisasDocuments]
 		 ,(5, 4)
 		 ,(5, 5)
 		 ,(5, 6)
+GO
+
+INSERT INTO [dbo].[AppRoles]
+           ([Name], [NameRus])
+     VALUES
+		 (N'Пользователь', N'User')
+		,(N'Администратор', 'Admin')
+GO
+
+INSERT INTO [dbo].[AppUsers]
+           ([Login], [Password])
+     VALUES
+		 (N'1', N'6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B')
+		,(N'2', N'D4735E3A265E16EEE03F59718B9B5D03019C07D8B6C51F90DA3A666EEC13AB35')
 GO
