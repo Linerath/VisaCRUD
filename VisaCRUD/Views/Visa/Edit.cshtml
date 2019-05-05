@@ -1,7 +1,7 @@
 ﻿@model EditVisaViewModel
 
 <div class="p-5">
-    <h2 class="text-center">Добавление новой визы</h2>
+    <h2 class="text-center">Изменение визы</h2>
     @using (Html.BeginForm("Edit", "Visa", FormMethod.Post))
     {
         @Html.Hidden("Id", Model.Visa.Id)
