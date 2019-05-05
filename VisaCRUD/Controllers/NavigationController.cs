@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using VisaCRUD.DAL.Entities;
+﻿using System.Web.Mvc;
 using VisaCRUD.DAL.Interfaces;
+using VisaCRUD.Infrastructure;
 using VisaCRUD.Models.ViewModels;
 
 namespace VisaCRUD.Controllers
 {
+    [RoleResult]
     public class NavigationController : Controller
     {
         private IVisasRepository visasRepository;

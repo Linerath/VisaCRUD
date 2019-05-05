@@ -2,9 +2,9 @@
 
 namespace VisaCRUD.Controllers
 {
-    public class MainController : Controller
+    public class ErrorController : Controller
     {
-        public ViewResult Home()
+        public ViewResult Forbidden()
         {
             return View();
         }

@@ -2,6 +2,7 @@
 
 @{
     List<Visa> visas = Model.Visas;
+    UserDto user = ViewData["User"] as UserDto;
 }
 
 @if (visas != null && visas.Count > 0)
@@ -15,18 +16,21 @@
                 <div class="visa-header d-inline">
                     <h2 class="d-inline">Информация о визе</h2>
                     <span class="visa-header-num float-right">#@(i + 1)</span>
-                    <span class="visa-header-btn float-right">
-                        @Html.ActionLink(
-                            "Изменить", "Edit",
-                            new { visaId = visa.Id },
-                            new { @class = "btn btn-primary" }
-                        )
-                        @Html.ActionLink(
-                            "Удалить", "Delete",
-                            new { visaId = visa.Id, countryId = Model.SelectedCountryId },
-                            new { @class = "btn", style = "color: white; background-color: #ff6170", onclick = "return onDelete()" }
-                        )
-                    </span>
+                    @if (user != null && user.HasRole("Admin"))
+                    {
+                        <span class="visa-header-btn float-right">
+                            @Html.ActionLink(
+                                "Изменить", "Edit",
+                                new { visaId = visa.Id },
+                                new { @class = "btn btn-primary" }
+                            )
+                            @Html.ActionLink(
+                                "Удалить", "Delete",
+                                new { visaId = visa.Id, countryId = Model.SelectedCountryId },
+                                new { @class = "btn", style = "color: white; background-color: #ff6170", onclick = "return onDelete()" }
+                            )
+                        </span>
+                    }
                 </div>
                 <div class="pl-2">
                     <div>

@@ -1,24 +1,47 @@
 ﻿@{
     Layout = null;
-    UserDto user = Session["User"] as UserDto;
+    bool auth = User.Identity.IsAuthenticated;
+    String username = User.Identity?.Name;
+    UserDto user = ViewData["User"] as UserDto;
 }
 
-<nav class="navbar navbar-light bg-secondary">
-    <ul class="navbar-nav navbar-brand">
-        <li>
-            @Html.ActionLink("Добавить визу", "Add", "Visa", new { }, new { @class = "text-light" })
-        </li>
-    </ul>
-    @if (user != null)
+<nav class="navbar navbar-expand navbar-light bg-dark">
+    @if (auth)
     {
+        <ul class="navbar-nav">
+            @if (user != null && user.HasRole("Admin"))
+            {
+                <li class="nav-item mr-3">
+                    @Html.ActionLink("Добавить визу", "Add", "Visa", new { }, new { @class = "" })
+                </li>
+            }
+            <li class="nav-item">
+                @Html.ActionLink("Все визы", "Info", "Visa", new { }, new { @class = "" })
+            </li>
+        </ul>
+
         <ul class="navbar-nav ml-auto">
             <li class="nav-item navbar-brand">
-                <span class="text-primary">@(user.Login)</span>
+                <span class="username">
+                    @username
+                    @if (user.HasRole("Admin"))
+                    {
+                        @:(Администратор)
+                    }
+                </span>
                 @Html.ActionLink(
                     " ", "Logout", "User",
                     new { },
                     new { @class = "fa fa-sign-out text-light" }
                 )
+            </li>
+        </ul>
+    }
+    else
+    {
+        <ul class="navbar-nav navbar-brand">
+            <li>
+                @Html.ActionLink("Войти", "Login", "User", new { }, new { @class = "text-light" })
             </li>
         </ul>
     }

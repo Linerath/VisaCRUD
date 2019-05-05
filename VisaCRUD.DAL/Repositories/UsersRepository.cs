@@ -1,10 +1,7 @@
 ﻿using Dapper;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VisaCRUD.DAL.Entities;
 using VisaCRUD.DAL.Interfaces;
 
@@ -19,9 +16,23 @@ namespace VisaCRUD.DAL.Repositories
             this.connectionString = connectionString;
         }
 
-        public User AddUser(User user)
+        public bool AddUser(User user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            String sql = "INSERT INTO AppUsers (Login, Password) Values (@Login, @Password); SELECT CAST(SCOPE_IDENTITY() as int)";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                int id = connection.Query<int>(sql, new { user.Login, user.Password }).Single();
+
+                sql = "INSERT INTO AppUsersRoles (User_Id, Role_Id) Values (@id, @role)";
+
+                connection.Execute(sql, new { id, role = 1 });
+
+                return id >= 0;
+            }
         }
 
         public User GetUserByLogin(String login)
@@ -53,6 +64,21 @@ namespace VisaCRUD.DAL.Repositories
                     new { login });
 
                 return result;
+            }
+        }
+
+        public bool IsLoginUnique(String login)
+        {
+            if (String.IsNullOrEmpty(login))
+                throw new ArgumentException(nameof(login));
+
+            string sql = "SELECT id FROM AppUsers WHERE Login = @login";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                int result = connection.QueryFirstOrDefault<int>(sql, new { login });
+
+                return result == 0;
             }
         }
 

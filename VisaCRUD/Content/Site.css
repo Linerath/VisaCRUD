@@ -82,6 +82,21 @@
     font-size: 16px;
 }
 
+.username {
+    color: #00ffc6;
+    margin-right: 5px;
+}
+
+.fa-sign-out {
+    border: 1px dashed;
+    border-radius: 10px;
+    padding: 3px;
+}
+
+.success-mess {
+    color: green;
+}
+
 /**************/
 body {
 }
@@ -100,4 +115,9 @@ a:hover {
 
 .row {
     margin: 0px;
+}
+
+.navbar-light a {
+    color: white;
+    font-size: 18px;
 }

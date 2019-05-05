@@ -1,27 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using VisaCRUD.DAL.Entities;
+using VisaCRUD.DAL.Interfaces;
 using VisaCRUD.Infrastructure.Interfaces;
 using VisaCRUD.Models.ViewModels;
+using VisaCRUD.Security;
 
 namespace VisaCRUD.Controllers
 {
     public class UserController : Controller
     {
         private IAuthProvider authProvider;
+        private IUsersRepository usersRepository;
 
-        public UserController(IAuthProvider authProvider)
+        public UserController(IAuthProvider authProvider, IUsersRepository usersRepository)
         {
             this.authProvider = authProvider;
+            this.usersRepository = usersRepository;
         }
 
         [HttpGet]
-        public ViewResult Login()
+        public ViewResult Login(String message = null)
         {
-            return View();
+            return View(message);
         }
 
         [HttpPost]
@@ -30,6 +32,7 @@ namespace VisaCRUD.Controllers
             if (ModelState.IsValid)
             {
                 UserDto user = authProvider.Authenticate(model?.Login, model?.Password);
+                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, model.Login, DateTime.Now, DateTime.Now.AddMinutes(20), true, "bi4");
 
                 if (user != null)
                 {
@@ -50,7 +53,7 @@ namespace VisaCRUD.Controllers
         public RedirectToRouteResult Logout()
         {
             authProvider.Logout();
-            
+
             return RedirectToAction("Login");
         }
 
@@ -61,8 +64,32 @@ namespace VisaCRUD.Controllers
         }
 
         [HttpPost]
-        public ViewResult CreateAccount(NewUserViewModel model)
+        public ActionResult CreateAccount(NewUserViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            if (!usersRepository.IsLoginUnique(model.Login))
+            {
+                ModelState.AddModelError("", "Такой логин уже существует. Пожалуйста, введите другой");
+                return View();
+            }
+
+            String passwordHash = CryptoService.GetHashCode(model.Password);
+            if (!usersRepository.AddUser(new User
+            {
+                Login = model.Login,
+                Password = passwordHash,
+            }))
+            {
+                ModelState.AddModelError("", "Произошла ошибка.");
+                return View();
+            }
+
+            ViewBag.Message = "Аккаунт успешно создан";
+
             return View();
         }
     }

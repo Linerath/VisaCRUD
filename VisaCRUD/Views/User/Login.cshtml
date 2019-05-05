@@ -1,4 +1,6 @@
-﻿@{
+﻿@model String
+
+@{
     Layout = "../Shared/_LayoutUser.cshtml";
 }
 
@@ -9,6 +11,13 @@
     routeValues: new { returnUri = Request.QueryString["ReturnUrl"] }
 ))
     {
+        if (!String.IsNullOrEmpty(Model))
+        {
+            <span class="success-mess">
+                @Model
+            </span>
+        }
+        @Html.ValidationSummary()
         <div class="form-group">
             <label for="login">Логин</label>
             <input type="text" class="form-control" id="login" name="login" placeholder="Введите логин">
@@ -20,7 +29,7 @@
 
         <div>
             @Html.ActionLink(
-                "Создать аккаунт", "CreateAccount",
+                "Регистрация", "CreateAccount",
                 new { },
                 new { @class = "d-inline-block mt-2 new-account" }
             )

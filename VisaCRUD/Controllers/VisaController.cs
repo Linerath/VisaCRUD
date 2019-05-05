@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using VisaCRUD.DAL.Entities;
 using VisaCRUD.DAL.Interfaces;
 using VisaCRUD.Infrastructure;
+using System.Collections.Generic;
 using VisaCRUD.Models.ViewModels;
 
 namespace VisaCRUD.Controllers
@@ -19,6 +19,7 @@ namespace VisaCRUD.Controllers
             this.visasRepository = visasRepository;
         }
 
+        [RoleResult]
         public ViewResult Info(int? countryId = null)
         {
             List<Visa> visas = (countryId != null)

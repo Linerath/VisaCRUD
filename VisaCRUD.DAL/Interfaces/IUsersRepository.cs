@@ -5,8 +5,9 @@ namespace VisaCRUD.DAL.Interfaces
 {
     public interface IUsersRepository
     {
-        User AddUser(User user);
+        bool AddUser(User user);
         bool TryDeleteUser(User user);
         User GetUserByLogin(String login);
+        bool IsLoginUnique(String login);
     }
 }
