@@ -14,6 +14,7 @@ namespace VisaCRUD.DAL.Interfaces
         void Delete(int id);
 
         List<Country> GetAllCountries();
+        List<Country> GetVisasCountries();
         Country GetCountryById(int id);
         List<ServiceType> GetAllServiceTypes();
         List<Document> GetAllDocuments();

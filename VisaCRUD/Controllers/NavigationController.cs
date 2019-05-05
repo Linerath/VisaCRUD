@@ -25,7 +25,7 @@ namespace VisaCRUD.Controllers
             CountriesViewModel model = new CountriesViewModel
             {
                 SelectedCountryId = selectedCountryId,
-                Countries = visasRepository.GetAllCountries(),
+                Countries = visasRepository.GetVisasCountries(),
             };
 
             return PartialView("SidebarPartial", model);

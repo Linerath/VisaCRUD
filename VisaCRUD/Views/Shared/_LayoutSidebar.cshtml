@@ -15,10 +15,10 @@
         @{ Html.RenderAction("Navbar", "Navigation"); }
 
         <div class="container-fluid row p-0">
-            <div class="col-lg-3 p-0">
+            <div class="col-lg-3 p-0 sidebar">
                 @{ Html.RenderAction("Sidebar", "Navigation", new { selectedCountryId = (Model != null ? Model.SelectedCountryId : null) }); }
             </div>
-            <main class="main-content col-lg-9 p-0">
+            <main class="main-content col p-0">
                 @RenderBody()
             </main>
         </div>

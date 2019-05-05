@@ -149,6 +149,18 @@ namespace VisaCRUD.DAL.Repositories
             }
         }
 
+        public List<Country> GetVisasCountries()
+        {
+            string sql = "SELECT DISTINCT t1.Id, t1.Name FROM Countries t1 INNER JOIN Visas t2 ON t1.Id=t2.Country_Id ORDER BY Name";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                List<Country> result = connection.Query<Country>(sql).ToList();
+
+                return result;
+            }
+        }
+
         public bool Update(Visa visa, int? id = null)
         {
             if (visa == null)
