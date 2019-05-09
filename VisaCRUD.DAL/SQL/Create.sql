@@ -47,7 +47,8 @@ CREATE TABLE [dbo].[Visas](
 	[Validity] [nvarchar](max),
 	[Period] [nvarchar](max),
 	[Number] [nvarchar](max),
-	[WebSite] [nvarchar](max),
+	[WebSite] [nvarchar](50),
+	[AdditionalDocs] [nvarchar](max),
  CONSTRAINT [PK_dbo.Visas] PRIMARY KEY CLUSTERED ([Id] ASC),
  CONSTRAINT [FK_dbo.Visas_dbo.Countries_Country_Id]
 	FOREIGN KEY([Country_Id])

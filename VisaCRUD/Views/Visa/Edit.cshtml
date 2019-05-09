@@ -1,6 +1,6 @@
 ﻿@model EditVisaViewModel
 
-<div class="p-5">
+<div class="main-border main-p">
     <h2 class="text-center">Изменение визы</h2>
     @using (Html.BeginForm("Edit", "Visa", FormMethod.Post))
     {
@@ -58,11 +58,16 @@
         {
             <div class="form-check">
                 <label class="form-check-label" for="@item.Id">
-                    <input class="form-check-input" type="checkbox" name="Documents" id="@item.Id" value="@item.Id" checked="false"/>
+                    <input class="form-check-input" type="checkbox" name="Documents" id="@item.Id" value="@item.Id" checked="@Model.Visa.Documents.Any(x => x.Id == item.Id)" />
                     @item.Name
                 </label>
             </div>
         }
+
+        <div class="form-row form-group col mt-3">
+            <h5>Дополнительные документы</h5>
+            @Html.TextBox("AdditionalDocs", Model.Visa.AdditionalDocs, new { @class = "form-control" })
+        </div>
 
         <button type="submit" class="btn btn-primary mt-3">Ок</button>
     }

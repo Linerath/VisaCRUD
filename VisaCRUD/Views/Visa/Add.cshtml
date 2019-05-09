@@ -1,6 +1,6 @@
 ﻿@model AddVisaViewModel
 
-<div class="p-5">
+<div class="main-border main-p">
     <h2 class="text-center">Добавление новой визы</h2>
     @using (Html.BeginForm("Add", "Visa", FormMethod.Post))
     {
@@ -62,6 +62,12 @@
             </div>
         }
 
-        <button type="submit" class="btn btn-primary mt-3">Ок</button>
+
+        <div class="form-row form-group col mt-3">
+            <h5>Дополнительные документы</h5>
+            @Html.TextBox("AdditionalDocs", null, new { @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">Ок</button>
     }
 </div>

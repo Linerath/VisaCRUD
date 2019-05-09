@@ -64,6 +64,7 @@ namespace VisaCRUD.Controllers
                 Period = visa.Period,
                 Number = visa.Number,
                 WebSite = visa.WebSite,
+                AdditionalDocs = visa.AdditionalDocs,
             };
 
             if (visa.ServiceType.HasValue)
@@ -114,6 +115,7 @@ namespace VisaCRUD.Controllers
                 Period = visa.Period,
                 Number = visa.Number,
                 WebSite = visa.WebSite,
+                AdditionalDocs = visa.AdditionalDocs,
             };
 
             if (visa.ServiceType.HasValue)

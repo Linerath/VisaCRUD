@@ -23,12 +23,12 @@ namespace VisaCRUD.DAL.Repositories
                 throw new ArgumentNullException(nameof(visa));
 
             String sql = @"
-                INSERT INTO Visas (Country_Id, ServiceType_Id, Terms, Validity, Period, Number, WebSite) Values (@Country, @ServiceType, @Terms, @Validity, @Period, @Number, @WebSite);
+                INSERT INTO Visas (Country_Id, ServiceType_Id, Terms, Validity, Period, Number, WebSite, AdditionalDocs) Values (@Country, @ServiceType, @Terms, @Validity, @Period, @Number, @WebSite, @AdditionalDocs);
                 SELECT CAST(SCOPE_IDENTITY() as int)";
 
             using (var connection = new SqlConnection(connectionString))
             {
-                int id = connection.Query<int>(sql, new { country = visa.Country.Id, serviceType = visa.ServiceType?.Id, visa.Terms, visa.Validity, visa.Period, visa.Number, visa.WebSite }).Single();
+                int id = connection.Query<int>(sql, new { country = visa.Country.Id, serviceType = visa.ServiceType?.Id, visa.Terms, visa.Validity, visa.Period, visa.Number, visa.WebSite, visa.AdditionalDocs }).Single();
 
                 if (visa.Documents?.Count > 0)
                 {
@@ -167,14 +167,14 @@ namespace VisaCRUD.DAL.Repositories
                 throw new ArgumentNullException(nameof(visa));
 
             String sql = @"
-                UPDATE Visas SET Country_Id = @country, ServiceType_Id = @serviceType, Terms = @terms, Validity = @validity, Period = @period, Number = @number, WebSite = @website WHERE Id = @id";
+                UPDATE Visas SET Country_Id = @country, ServiceType_Id = @serviceType, Terms = @terms, Validity = @validity, Period = @period, Number = @number, WebSite = @website, AdditionalDocs = @additionalDocs WHERE Id = @id";
 
             if (id == null)
                 id = visa.Id;
 
             using (var connection = new SqlConnection(connectionString))
             {
-                int result = connection.Execute(sql, new { country = visa.Country.Id, serviceType = visa.ServiceType?.Id, visa.Terms, visa.Validity, visa.Period, visa.Number, visa.WebSite, id });
+                int result = connection.Execute(sql, new { country = visa.Country.Id, serviceType = visa.ServiceType?.Id, visa.Terms, visa.Validity, visa.Period, visa.Number, visa.WebSite, visa.AdditionalDocs, id });
 
                 if (result != 1)
                     return false;
@@ -254,7 +254,7 @@ namespace VisaCRUD.DAL.Repositories
                     .Query<Visa, Country, ServiceType, Document, Visa>(sql,
                     (_visa, _country, _serviceType, _document) =>
                     {
-                        if (result == null || result.Id == _visa?.Id)
+                        if (result == null || result.Id != _visa?.Id)
                             result = _visa;
 
                         if (_visa.Country == null && _country != null)
@@ -262,7 +262,7 @@ namespace VisaCRUD.DAL.Repositories
                         if (_visa.ServiceType == null && _serviceType != null)
                             _visa.ServiceType = _serviceType;
                         if (_document != null)
-                            _visa.Documents.Add(_document);
+                            result.Documents.Add(_document);
 
                         return _visa;
                     },

@@ -12,6 +12,7 @@ namespace VisaCRUD.Models.ViewModels
         public String Period { get; set; }
         public String Number { get; set; }
         public String WebSite { get; set; }
+        public String AdditionalDocs { get; set; }
         public int[] Documents { get; set; }
     }
 }

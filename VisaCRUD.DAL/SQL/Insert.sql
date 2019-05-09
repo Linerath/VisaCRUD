@@ -226,15 +226,15 @@ INSERT INTO [dbo].[ServiceTypes]
 GO
 
 INSERT INTO [dbo].[Visas]
-           ([Country_Id], [ServiceType_Id], [Terms], [Validity], [Period], [Number], [WebSite])
+           ([Country_Id], [ServiceType_Id], [Terms], [Validity], [Period], [Number], [WebSite], [AdditionalDocs])
      VALUES
-		 (13, 1, N'0 дней', N'1337 дней', N'2 месяца', N'1 день', N'visa-for-real-niggaz.com')
-		,(89, 1, N'0 дней', N'29 дней', N'12 месяцев', N'бесконечно', N'hithere.com')
-		,(198, 1, N'0 дней', N'29 дней', N'12 месяцев', N'бесконечно', N'bb.com')
-		,(101, 1, N'хз дней', N'чего?', N'навсегда', N'до смерти', N'allo.com')
-		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', N'Untill dawn', N'rip.com')
-		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', N'Untill dawn', N'rip.com')
-		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', N'Untill dawn', N'rip.com')
+		 (13, 1, N'0 дней', N'1337 дней', N'2 месяца', N'1 день', N'visa-for-real-niggaz.com', NULL)
+		,(89, 1, N'0 дней', N'29 дней', N'12 месяцев', N'бесконечно', N'hithere.com', NULL)
+		,(198, 1, N'0 дней', N'29 дней', N'12 месяцев', N'бесконечно', N'bb.com', NULL)
+		,(101, 1, N'хз дней', N'чего?', N'навсегда', N'до смерти', N'allo.com', NULL)
+		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', N'Untill dawn', N'rip.com', N'Wat')
+		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', N'Untill dawn', N'rip.com', N'N?')
+		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', N'Untill dawn', N'rip.com', N'!!!')
 GO
 
 INSERT INTO [dbo].[VisasDocuments]
