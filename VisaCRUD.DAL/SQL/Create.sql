@@ -27,14 +27,14 @@ GO
 
 CREATE TABLE [dbo].[Countries](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [nvarchar](max) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
  CONSTRAINT [PK_dbo.Countries] PRIMARY KEY CLUSTERED ([Id] ASC),
 )
 GO
 
 CREATE TABLE [dbo].[ServiceTypes](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [nvarchar](max) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
  CONSTRAINT [PK_dbo.ServiceTypes] PRIMARY KEY CLUSTERED ([Id] ASC),
 )
 GO
@@ -43,12 +43,12 @@ CREATE TABLE [dbo].[Visas](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Country_Id] [int] NOT NULL,
 	[ServiceType_Id] [int],
-	[Terms] [nvarchar](max),
-	[Validity] [nvarchar](max),
-	[Period] [nvarchar](max),
-	[Number] [nvarchar](max),
+	[Terms] [nvarchar](100),
+	[Validity] [nvarchar](100),
+	[Period] [nvarchar](100),
+	[Price] [DECIMAL](6, 2),
 	[WebSite] [nvarchar](50),
-	[AdditionalDocs] [nvarchar](max),
+	[AdditionalDocs] [nvarchar](256),
  CONSTRAINT [PK_dbo.Visas] PRIMARY KEY CLUSTERED ([Id] ASC),
  CONSTRAINT [FK_dbo.Visas_dbo.Countries_Country_Id]
 	FOREIGN KEY([Country_Id])
@@ -63,8 +63,8 @@ GO
 
 CREATE TABLE [dbo].[Documents](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [nvarchar](max) NOT NULL,
-	[Description] [nvarchar](max) NOT NULL,
+	[Name] [nvarchar](256) NOT NULL,
+	[Description] [nvarchar](256),
  CONSTRAINT [PK_dbo.Documents] PRIMARY KEY CLUSTERED ([Id] ASC),
 )
 GO

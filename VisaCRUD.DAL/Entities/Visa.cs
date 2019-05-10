@@ -11,7 +11,7 @@ namespace VisaCRUD.DAL.Entities
         public String Terms { get; set; }
         public String Validity { get; set; }
         public String Period { get; set; }
-        public String Number { get; set; }
+        public decimal Price { get; set; }
         public String WebSite { get; set; }
         public String AdditionalDocs { get; set; }
         public List<Document> Documents { get; set; }

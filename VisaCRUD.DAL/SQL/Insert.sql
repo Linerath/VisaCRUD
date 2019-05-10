@@ -210,54 +210,35 @@ INSERT INTO [dbo].[Documents]
            ([Name], [Description])
      VALUES
 		 (N'Паспорт', N'Документ, удостоверяющий личность')
-		,(N'Бумажный пакет', N'На случай, если вас стошнит при переезде')
-		,(N'Деньги', N'$Много денег$')
-		,(N'Горящие глаза', N'Энтузиазм и желание работать за еду')
-		,(N'Фликер', N'Светоотражающий элемент')
-		,(N'Удочка', N'Рыбалка - не только занятие для личного времяпрепровождения, но и отличный способ заработка!')
+		,(N'Одна фотография на светлом фоне', NULL)
+		,(N'Недавняя выписка со счёта в банке', N'Не раньше чем за месяц до даты подачи документов')
 GO
 
 INSERT INTO [dbo].[ServiceTypes]
            ([Name])
      VALUES
-		 (N'Виза')
-		,(N'Вексель')
-		,(N'Тумаки')
+		 (N'Однократная виза')
+		,(N'Многократная виза')
 GO
 
 INSERT INTO [dbo].[Visas]
-           ([Country_Id], [ServiceType_Id], [Terms], [Validity], [Period], [Number], [WebSite], [AdditionalDocs])
+           ([Country_Id], [ServiceType_Id], [Terms], [Validity], [Period], [Price], [WebSite], [AdditionalDocs])
      VALUES
-		 (13, 1, N'0 дней', N'1337 дней', N'2 месяца', N'1 день', N'visa-for-real-niggaz.com', NULL)
-		,(89, 1, N'0 дней', N'29 дней', N'12 месяцев', N'бесконечно', N'hithere.com', NULL)
-		,(198, 1, N'0 дней', N'29 дней', N'12 месяцев', N'бесконечно', N'bb.com', NULL)
-		,(101, 1, N'хз дней', N'чего?', N'навсегда', N'до смерти', N'allo.com', NULL)
-		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', N'Untill dawn', N'rip.com', N'Wat')
-		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', N'Untill dawn', N'rip.com', N'N?')
-		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', N'Untill dawn', N'rip.com', N'!!!')
+		 (13, 1, N'0 дней', N'1337 дней', N'2 месяца', 13.37, N'rip.com', NULL)
+		,(89, 1, N'0 дней', N'29 дней', N'12 месяцев', 13.37, N'hithere.com', NULL)
+		,(198, 1, N'0 дней', N'29 дней', N'12 месяцев', 13.37, N'bb.com', NULL)
+		,(101, 1, N'хз дней', N'чего?', N'навсегда', 13.37, N'allo.com', NULL)
+		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', 13.37, N'visaz-for-real-niggaz.com', N'Wat')
+		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', 13.37, N'visaz-for-real-niggaz.com', N'N?')
+		,(1, 1, N'Jungle', N'Broken glass everywhere!', N'4ever', 13.37, N'visaz-for-real-niggaz.com', N'!!!')
 GO
 
 INSERT INTO [dbo].[VisasDocuments]
            ([Visa_Id], [Document_Id])
      VALUES
-		  (1, 1)
-		 ,(1, 2)
-		 ,(1, 3)
-		 ,(1, 4)
-		 ,(1, 5)
-		 ,(1, 6)
-		 ,(2, 1)
-		 ,(2, 2)
-		 ,(2, 3)
-		 ,(2, 4)
-		 ,(2, 5)
-		 ,(2, 6)
-		 ,(5, 1)
+		  (5, 1)
 		 ,(5, 2)
 		 ,(5, 3)
-		 ,(5, 4)
-		 ,(5, 5)
-		 ,(5, 6)
 GO
 
 INSERT INTO [dbo].[AppRoles]

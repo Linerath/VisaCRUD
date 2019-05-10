@@ -23,12 +23,12 @@ namespace VisaCRUD.DAL.Repositories
                 throw new ArgumentNullException(nameof(visa));
 
             String sql = @"
-                INSERT INTO Visas (Country_Id, ServiceType_Id, Terms, Validity, Period, Number, WebSite, AdditionalDocs) Values (@Country, @ServiceType, @Terms, @Validity, @Period, @Number, @WebSite, @AdditionalDocs);
+                INSERT INTO Visas (Country_Id, ServiceType_Id, Terms, Validity, Period, Price, WebSite, AdditionalDocs) Values (@Country, @ServiceType, @Terms, @Validity, @Period, @Price, @WebSite, @AdditionalDocs);
                 SELECT CAST(SCOPE_IDENTITY() as int)";
 
             using (var connection = new SqlConnection(connectionString))
             {
-                int id = connection.Query<int>(sql, new { country = visa.Country.Id, serviceType = visa.ServiceType?.Id, visa.Terms, visa.Validity, visa.Period, visa.Number, visa.WebSite, visa.AdditionalDocs }).Single();
+                int id = connection.Query<int>(sql, new { country = visa.Country.Id, serviceType = visa.ServiceType?.Id, visa.Terms, visa.Validity, visa.Period, visa.Price, visa.WebSite, visa.AdditionalDocs }).Single();
 
                 if (visa.Documents?.Count > 0)
                 {
@@ -167,14 +167,14 @@ namespace VisaCRUD.DAL.Repositories
                 throw new ArgumentNullException(nameof(visa));
 
             String sql = @"
-                UPDATE Visas SET Country_Id = @country, ServiceType_Id = @serviceType, Terms = @terms, Validity = @validity, Period = @period, Number = @number, WebSite = @website, AdditionalDocs = @additionalDocs WHERE Id = @id";
+                UPDATE Visas SET Country_Id = @country, ServiceType_Id = @serviceType, Terms = @terms, Validity = @validity, Period = @period, Price = @Price, WebSite = @website, AdditionalDocs = @additionalDocs WHERE Id = @id";
 
             if (id == null)
                 id = visa.Id;
 
             using (var connection = new SqlConnection(connectionString))
             {
-                int result = connection.Execute(sql, new { country = visa.Country.Id, serviceType = visa.ServiceType?.Id, visa.Terms, visa.Validity, visa.Period, visa.Number, visa.WebSite, visa.AdditionalDocs, id });
+                int result = connection.Execute(sql, new { country = visa.Country.Id, serviceType = visa.ServiceType?.Id, visa.Terms, visa.Validity, visa.Period, visa.Price, visa.WebSite, visa.AdditionalDocs, id });
 
                 if (result != 1)
                     return false;

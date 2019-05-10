@@ -42,7 +42,7 @@
                     <div>Сроки оформления: <i>@visa.Terms</i></div>
                     <div>Период действия визы: <i>@visa.Validity</i></div>
                     <div>Период пребывания в стране: <i>@visa.Period</i></div>
-                    <div>Количество въездов в страну: <i>@visa.Number</i></div>
+                    <div>Цена: <i>@visa.Price.ToString("N2")$</i></div>
                     <div>Сайт посольства: <i>@visa.WebSite</i></div>
                 </div>
                 @if (visa.Documents.Count > 0 || !String.IsNullOrWhiteSpace(visa.AdditionalDocs))

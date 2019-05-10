@@ -6,6 +6,7 @@ using VisaCRUD.DAL.Interfaces;
 using VisaCRUD.Infrastructure;
 using System.Collections.Generic;
 using VisaCRUD.Models.ViewModels;
+using System.Globalization;
 
 namespace VisaCRUD.Controllers
 {
@@ -51,8 +52,14 @@ namespace VisaCRUD.Controllers
 
         [RoleAuthorize(Roles = "Admin")]
         [HttpPost]
-        public RedirectToRouteResult Add(NewVisaViewModel visa)
+        public ActionResult Add(NewVisaViewModel visa)
         {
+            if (!decimal.TryParse(visa.Price, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal price))
+            {
+                ModelState.AddModelError("", "Введена некорректная цена.");
+                return View();
+            }
+
             Visa newVisa = new Visa
             {
                 Country = new Country
@@ -62,7 +69,7 @@ namespace VisaCRUD.Controllers
                 Terms = visa.Terms,
                 Validity = visa.Validity,
                 Period = visa.Period,
-                Number = visa.Number,
+                Price = price,
                 WebSite = visa.WebSite,
                 AdditionalDocs = visa.AdditionalDocs,
             };
@@ -98,10 +105,16 @@ namespace VisaCRUD.Controllers
 
         [RoleAuthorize(Roles = "Admin")]
         [HttpPost]
-        public RedirectToRouteResult Edit(NewVisaViewModel visa)
+        public ActionResult Edit(NewVisaViewModel visa)
         {
             if (!visa.Id.HasValue)
                 throw new ArgumentException("id");
+
+            if (!decimal.TryParse(visa.Price, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal price))
+            {
+                ModelState.AddModelError("", "Введена некорректная цена.");
+                return View();
+            }
 
             Visa newVisa = new Visa
             {
@@ -113,7 +126,7 @@ namespace VisaCRUD.Controllers
                 Terms = visa.Terms,
                 Validity = visa.Validity,
                 Period = visa.Period,
-                Number = visa.Number,
+                Price = price,
                 WebSite = visa.WebSite,
                 AdditionalDocs = visa.AdditionalDocs,
             };

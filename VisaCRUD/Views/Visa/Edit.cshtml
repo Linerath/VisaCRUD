@@ -2,8 +2,12 @@
 
 <div class="main-border main-p">
     <h2 class="text-center">Изменение визы</h2>
-    @using (Html.BeginForm("Edit", "Visa", FormMethod.Post))
+    @using (Html.BeginForm(
+        "Edit", "Visa", FormMethod.Post,
+        htmlAttributes: new { onsubmit = "return validateForm(this)" }
+    ))
     {
+        @Html.ValidationSummary();
         @Html.Hidden("Id", Model.Visa.Id)
 
         <div class="form-group">
@@ -42,8 +46,8 @@
 
         <div class="form-row">
             <div class="form-group col">
-                @Html.Label("Number", "Количество въездов в страну")
-                @Html.TextBox("Number", Model.Visa.Number, new { @class = "form-control" })
+                @Html.Label("Price", "Цена")
+                <input type="number" name="Price" id="Price" class="form-control" value="@Model.Visa.Price.ToStr()" min="0" max="999999" step="0.01" />
             </div>
             <div class="form-group col">
                 @Html.Label("WebSite", "Сайт посольства")
@@ -58,7 +62,7 @@
         {
             <div class="form-check">
                 <label class="form-check-label" for="@item.Id">
-                    <input class="form-check-input" type="checkbox" name="Documents" id="@item.Id" value="@item.Id" checked="@Model.Visa.Documents.Any(x => x.Id == item.Id)" />
+                    <input type="checkbox" name="Documents" class="form-check-input" id="@item.Id" value="@item.Id" checked="@Model.Visa.Documents.Any(x => x.Id == item.Id)" />
                     @item.Name
                 </label>
             </div>
@@ -69,6 +73,6 @@
             @Html.TextBox("AdditionalDocs", Model.Visa.AdditionalDocs, new { @class = "form-control" })
         </div>
 
-        <button type="submit" class="btn btn-primary mt-3">Ок</button>
+        <button type="submit" class="btn btn-primary">Ок</button>
     }
 </div>
